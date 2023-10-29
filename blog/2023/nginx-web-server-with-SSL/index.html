@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"> <html><body> <p>Running an Nginx Docker container with a self-signed SSL certificate involves a few steps. Here’s a step-by-step guide to help you set it up:</p> <ol> <li> <p><strong>Create a Self-Signed SSL Certificate:</strong></p> <p>You can use the OpenSSL tool to generate a self-signed SSL certificate.</p> <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>openssl req <span class="nt">-x509</span> <span class="nt">-nodes</span> <span class="nt">-days</span> 365 <span class="nt">-newkey</span> rsa:2048 <span class="nt">-keyout</span> nginx.key <span class="nt">-out</span> nginx.crt
+</code></pre></div> </div> <p>This command will generate two files: <code class="language-plaintext highlighter-rouge">nginx.key</code> (private key) and <code class="language-plaintext highlighter-rouge">nginx.crt</code> (self-signed certificate).</p> </li> <li> <p><strong>Create a Dockerfile:</strong></p> <p>Create a file named <code class="language-plaintext highlighter-rouge">Dockerfile</code> in your project directory with the following content:</p> <div class="language-Dockerfile highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> nginx:latest</span>
+
+<span class="c"># Copy the SSL certificate and key to the container</span>
+<span class="k">COPY</span><span class="s"> nginx.crt /etc/nginx/ssl/nginx.crt</span>
+<span class="k">COPY</span><span class="s"> nginx.key /etc/nginx/ssl/nginx.key</span>
+
+<span class="c"># Copy the Nginx configuration file</span>
+<span class="k">COPY</span><span class="s"> nginx.conf /etc/nginx/conf.d/default.conf</span>
+</code></pre></div> </div> </li> <li> <p><strong>Create Nginx Configuration:</strong></p> <p>Create an <code class="language-plaintext highlighter-rouge">nginx.conf</code> file in the same directory as your Dockerfile with the following content:</p> <div class="language-nginx highlighter-rouge"> <div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">your_domain.com</span><span class="p">;</span>  <span class="c1"># Change this to your domain name</span>
+
+    <span class="kn">ssl_certificate</span> <span class="n">/etc/nginx/ssl/nginx.crt</span><span class="p">;</span>
+    <span class="kn">ssl_certificate_key</span> <span class="n">/etc/nginx/ssl/nginx.key</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">root</span>   <span class="n">/usr/share/nginx/html</span><span class="p">;</span>
+        <span class="kn">index</span>  <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div> </div> <p>Replace <code class="language-plaintext highlighter-rouge">your_domain.com</code> with your actual domain name.</p> </li> <li> <p><strong>Build the Docker Image:</strong></p> <p>Run the following command in your terminal to build the Docker image:</p> <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> nginx-ssl <span class="nb">.</span>
+</code></pre></div> </div> </li> <li> <p><strong>Run the Docker Container:</strong></p> <p>Finally, run the Docker container using the following command:</p> <div class="language-bash highlighter-rouge"> <div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">-p</span> 443:443 nginx-ssl
+</code></pre></div> </div> </li> </ol> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --name some-nginx -v /some/content:/usr/share/nginx/html:ro -d nginx
+</code></pre></div></div> <p>docker run –name nginx-ssl -v //home/ubuntu/data:/usr/share/nginx/html:ro -p 443:443 -d nginx-ssl</p> <p>This maps the container’s port 443 to the host’s port 443.</p> <ol> <li> <p><strong>Access the Site:</strong></p> <p>Open a web browser and navigate to <code class="language-plaintext highlighter-rouge">https://your_domain.com</code>. You might get a security warning due to the self-signed certificate, but you can proceed to the site. The browser will indicate that the connection is not fully secure because the certificate is self-signed.</p> </li> </ol> <p>Remember that using self-signed certificates is not recommended for production environments since they don’t provide the same level of security as trusted certificates issued by a certificate authority. In a production environment, you should obtain a valid SSL certificate from a trusted certificate authority like Let’s Encrypt.</p> </body></html>
