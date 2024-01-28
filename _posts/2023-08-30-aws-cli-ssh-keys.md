@@ -1,6 +1,6 @@
 ---
 layout: post
-title: a post with code
+title: create a ssh key using aws-cli and store in PPK 
 date: 2023-08-30 15:09:00
 description: Using aws-cli to generate ssh-key 
 tags: formatting code
