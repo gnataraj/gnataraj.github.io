@@ -1,3 +1,14 @@
+---
+layout: post
+title: pull a remote git branch to local repository 
+date: 2023-08-30 15:09:00
+description: pull a remote git branch to local repository 
+tags: git 
+categories: sample-posts
+featured: true
+---
+
+
 To pull the remote branch to your local repository using Git, follow these steps:
 
 1. Make sure you have Git installed on your computer and that you have already cloned the repository.
