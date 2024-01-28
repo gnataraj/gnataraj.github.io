@@ -6,6 +6,7 @@ description: troubleshooting ssl/tls certificate valiadation issue in wget
 tags: troubleshoot
 categories: troubleshoot
 featured: true
+---
 
 If you're encountering the "SSL/TLS certificate is not being validated" issue with the `wget` command, it means that `wget` is not able to verify the SSL/TLS certificate of the server. This could happen for various reasons, and here are some steps you can take to address the issue:
 
