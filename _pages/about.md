@@ -2,8 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
-
+subtitle: Cloud Architect | DevSecOps
 profile:
   align: right
   image: gnataraj-mono.jpg
