@@ -16,7 +16,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-kubernetes-poddisruptionbudget-explained",
+        },{id: "post-kubernetes-rbac-deep-dive-with-real-scenarios",
+        
+          title: "Kubernetes RBAC deep dive with real scenarios",
+        
+        description: "Auto-generated blog on Kubernetes RBAC deep dive with real scenarios",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/kubernetes-rbac-deep-dive-with-real-scenarios/";
+          
+        },
+      },{id: "post-kubernetes-poddisruptionbudget-explained",
         
           title: "Kubernetes PodDisruptionBudget explained",
         
