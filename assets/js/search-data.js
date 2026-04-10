@@ -16,7 +16,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "post-kubernetes-rbac-deep-dive-with-real-scenarios",
+        },{id: "post-helmfile-vs-helm-practical-comparison",
+        
+          title: "Helmfile vs Helm practical comparison",
+        
+        description: "Auto-generated blog on Helmfile vs Helm practical comparison",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/helmfile-vs-helm-practical-comparison/";
+          
+        },
+      },{id: "post-kubernetes-rbac-deep-dive-with-real-scenarios",
         
           title: "Kubernetes RBAC deep dive with real scenarios",
         
